@@ -1,4 +1,4 @@
-package com.daocao.auth.domain.entity.Dto;
+package com.daocao.common.entity.Dto;
 
 import lombok.Data;
 
@@ -7,4 +7,5 @@ import java.io.Serializable;
 public class LoginDto implements Serializable {
     public String account;
     public String password;
+    private Integer rememberMe;
 }

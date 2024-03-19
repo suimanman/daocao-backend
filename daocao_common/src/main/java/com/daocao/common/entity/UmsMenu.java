@@ -1,4 +1,4 @@
-package com.daocao.auth.domain.entity;
+package com.daocao.common.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
@@ -7,14 +7,19 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Data
-@TableName("ums_role")
-public class UmsRole implements Serializable {
+@TableName("ums_menu")
+public class UmsMenu implements Serializable {
     @TableId
-    private  Long roleId;
-    private  String roleLabel;
-    private  String roleName;
+    private  Long id;
+    private Long parentId;
+    private  String menuName;
+    private  Integer menuType;
     private  Integer sort;
-    private  Integer status;
+    private  String path;
+    private  String componentPath;
+    private  String perms;
+    private  String icon;
+    private  String status;
     @TableLogic
     private  Integer deleted;
     private  String remark;

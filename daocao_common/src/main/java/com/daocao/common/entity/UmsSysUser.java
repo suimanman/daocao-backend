@@ -1,11 +1,12 @@
-package com.daocao.auth.domain.entity;
+package com.daocao.common.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @TableName("ums_sys_user")
@@ -30,4 +31,8 @@ public class UmsSysUser implements Serializable {
     //逻辑删除，mybatis默认0是未删除，1是已删除
     @TableLogic
     private Integer deleted;
+
+    @TableField(exist = false)
+    //角色信息
+    private List<UmsRole> roleList=new ArrayList<>();
 }

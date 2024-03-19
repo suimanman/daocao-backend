@@ -8,8 +8,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 @Slf4j
 public class DaoCaoApplication {
+
     public static void main(String[] args) {
         SpringApplication.run(DaoCaoApplication.class,args);
-        log.info("项目启动成功");
     }
 }

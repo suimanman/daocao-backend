@@ -2,6 +2,61 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.daocao.auth.domain.mapper.UmsSysUserMapper">
+<mapper namespace="com.daocao.common.mapper.UmsSysUserMapper">
+    
+    <resultMap id="sysUserResultMap" type="com.daocao.common.entity.UmsSysUser">
+        <id column="id" property="id"/>
+        <result column="username" property="username"/>
+        <result column="nickname" property="nickname"/>
+        <result column="email" property="email"/>
+        <result column="mobile" property="mobile"/>
+        <result column="sex" property="sex"/>
+        <result column="avatar" property="avatar"/>
+        <result column="password" property="password"/>
+        <result column="status" property="status"/>
+        <result column="creator" property="creator"/>
+        <result column="createTime" property="createTime"/>
+        <result column="updateTime" property="updateTime"/>
+        <result column="updater" property="updater"/>
+        <result column="remark" property="remark"/>
+        <result column="deleted" property="deleted"/>
+        <collection property="roleList" javaType="list" resultMap="UmsRoleResultMap"/>
+    </resultMap>
+<!--配置角色映射-->
+    <resultMap id="UmsRoleResultMap" type="com.daocao.common.entity.UmsRole">
+        <id column="role_id" property="roleId"/>
+        <result column="role_label" property="roleLabel"/>
+        <result column="role_name" property="roleName"/>
+        <result column="sort" property="sort"/>
+        <result column="status" property="status"/>
+        <result column="deleted" property="deleted"/>
+        <result column="remark" property="remark"/>
+        <result column="creator" property="creator"/>
+        <result column="status" property="status"/>
+        <result column="creator" property="creator"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="updater" property="updater"/>
+    </resultMap>
 
+    <select id="selectUserByUserName" resultMap="sysUserResultMap">
+        select su.*,ur.*
+            from ums_sys_user su ,ums_sys_user_role sur ,ums_role ur
+        <where>
+            su.id=sur.user_id and ur.role_id=sur.role_id
+            and su.deleted = 0 and ur.deleted = 0 and
+            <if test="accountType==0">
+                su.username=#{account}
+            </if>
+            <if test="accountType==1">
+                su.mobile=#{account}
+            </if>
+            <if test="accountType==2">
+                su.email=#{account}
+            </if>
+
+        </where>
+
+
+    </select>
 </mapper>

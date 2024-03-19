@@ -1,7 +1,7 @@
 package com.daocao.auth.domain.controller;
 
-import com.daocao.auth.domain.entity.UmsSysUser;
-import com.daocao.auth.domain.service.IUmsSysUserService;
+import com.daocao.common.entity.UmsSysUser;
+import com.daocao.common.service.IUmsSysUserService;
 import com.daocao.common.response.DaoCaoResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

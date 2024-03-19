@@ -1,9 +1,9 @@
-package com.daocao.auth.domain.service.impl;
+package com.daocao.common.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.daocao.auth.domain.entity.UmsMenu;
-import com.daocao.auth.domain.mapper.UmsMenuMapper;
-import com.daocao.auth.domain.service.IUmsMenuService;
+import com.daocao.common.entity.UmsMenu;
+import com.daocao.common.mapper.UmsMenuMapper;
+import com.daocao.common.service.IUmsMenuService;
 import org.springframework.stereotype.Service;
 
 @Service
