@@ -4,9 +4,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.example</groupId>
+    <groupId>com.daocao</groupId>
     <artifactId>daocao-backend</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.0</version>
     <packaging>pom</packaging>
     <modules>
         <module>daocao_common</module>
@@ -114,7 +114,21 @@
                 <artifactId>lombok</artifactId>
                 <version>${lombok.version}</version>
             </dependency>
-
+            <dependency>
+                <groupId>com.daocao</groupId>
+                <artifactId>daocao_support</artifactId>
+                <version>1.0.0</version>
+            </dependency>
+            <dependency>
+                <groupId>com.daocao</groupId>
+                <artifactId>daocao_common</artifactId>
+                <version>${daocao.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.daocao</groupId>
+                <artifactId>daocao_auth</artifactId>
+                <version>${daocao.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 </project>
