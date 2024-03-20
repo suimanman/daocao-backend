@@ -3,5 +3,15 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.daocao.common.mapper.UmsMenuMapper">
-
+<!--根据roleId批量查询菜单-->
+    <select id="selectByRoleIds" resultType="com.daocao.common.entity.UmsMenu">
+        select um.id,um.parent_id,um.menu_name,um.sort,um.menu_type,um.path,um.component_path,um.perms,um.icon
+            from ums_menu um,ums_role_menu urm
+        where um.id=urm.menu_id
+        and urm.role_id in
+        <foreach collection="roleIds" open="(" close=")" separator="," item="roleId">
+            #{roleId}
+        </foreach>
+        and um.deleted = 0 and um.status=0
+    </select>
 </mapper>

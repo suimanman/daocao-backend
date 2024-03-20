@@ -35,4 +35,7 @@ public class UmsSysUser implements Serializable {
     @TableField(exist = false)
     //角色信息
     private List<UmsRole> roleList=new ArrayList<>();
+    @TableField(exist = false)
+    //权限列表
+    private List<String> perms=new ArrayList<>();
 }

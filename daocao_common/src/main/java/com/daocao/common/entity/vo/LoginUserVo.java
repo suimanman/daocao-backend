@@ -1,11 +1,16 @@
 package com.daocao.common.entity.vo;
 
+import cn.hutool.core.util.ObjectUtil;
 import com.daocao.common.entity.UmsSysUser;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Data
 public class LoginUserVo implements UserDetails {
     private Long id;
@@ -15,6 +20,11 @@ public class LoginUserVo implements UserDetails {
     //用户权限
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
+        List<String> perms=sysUser.getPerms();
+        //判空，返回数据
+        if(ObjectUtil.isNotEmpty(perms)){
+            return perms.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList());
+        }
         return null;
     }
 

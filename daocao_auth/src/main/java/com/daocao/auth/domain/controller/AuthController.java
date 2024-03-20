@@ -27,12 +27,8 @@ public class AuthController {
     @PostMapping("sys")
     public DaoCaoResult sysLogin(@RequestBody LoginDto loginDto){
         log.info("--------{}",loginDto);
-        authService.login(loginDto);
-        return DaoCaoResult.success();
+        String token=authService.login(loginDto);
+        return DaoCaoResult.success().put("token",token);
     }
-    @GetMapping()
-    public String test(){
-        System.out.println(passwordEncoder.encode("123456"));
-        return "";
-    }
+
 }
