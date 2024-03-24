@@ -15,8 +15,9 @@ import java.util.stream.Collectors;
 public class LoginUserVo implements UserDetails {
     private Long id;
     private String token;
+    private long loginTime;
     //用户信息
-    private UmsSysUser sysUser;
+    private UmsSysUser sysUser=new UmsSysUser();
     //用户权限
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

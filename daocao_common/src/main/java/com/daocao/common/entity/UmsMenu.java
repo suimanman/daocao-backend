@@ -5,6 +5,8 @@ import lombok.Data;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @TableName("ums_menu")
@@ -29,4 +31,6 @@ public class UmsMenu implements Serializable {
     private LocalDateTime createTime;
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private  LocalDateTime updateTime;
+    @TableField(exist = false)
+    private List<UmsMenu> children=new ArrayList<>();
 }

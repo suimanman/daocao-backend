@@ -13,6 +13,7 @@
         <module>daocao_support</module>
         <module>daocao_auth</module>
         <module>daocao_starter</module>
+        <module>daocao_sys_user</module>
     </modules>
     <properties>
         <maven.compiler.source>21</maven.compiler.source>
@@ -127,6 +128,11 @@
             <dependency>
                 <groupId>com.daocao</groupId>
                 <artifactId>daocao_auth</artifactId>
+                <version>${daocao.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.daocao</groupId>
+                <artifactId>daocao_sys_user</artifactId>
                 <version>${daocao.version}</version>
             </dependency>
         </dependencies>

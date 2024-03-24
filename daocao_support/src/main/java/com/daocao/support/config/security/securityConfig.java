@@ -1,5 +1,6 @@
 package com.daocao.support.config.security;
 
+import com.daocao.support.config.filter.JwtAuthticationFilter;
 import jakarta.annotation.Resource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,6 +15,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -27,7 +29,8 @@ public class securityConfig {
 
     @Resource
     UserDetailsService userDetailsService;
-
+    @Resource
+    JwtAuthticationFilter jwtAuthticationFilter;
     /*
     配置过滤器链
      */
@@ -35,9 +38,11 @@ public class securityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
             .csrf(AbstractHttpConfigurer::disable)
-            .authorizeHttpRequests(auth-> auth.requestMatchers("/**").permitAll().anyRequest().authenticated())
+            .authorizeHttpRequests(auth-> auth.requestMatchers("/auth/sys").permitAll().anyRequest().authenticated())
 //            .formLogin(Customizer.withDefaults())
-            .cors(cors->cors.configurationSource(configurationSource()));
+            .cors(cors->cors.configurationSource(configurationSource()))
+            .addFilterBefore(jwtAuthticationFilter, UsernamePasswordAuthenticationFilter.class);
+
         return http.build();
     }
     //创建AuthenticationManager

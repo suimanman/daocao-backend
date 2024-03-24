@@ -9,21 +9,12 @@
         <version>1.0.0</version>
     </parent>
 
-    <artifactId>daocao_starter</artifactId>
-<description>启动类模块</description>
-    <properties>
-        <maven.compiler.source>21</maven.compiler.source>
-        <maven.compiler.target>21</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
+    <artifactId>daocao_sys_user</artifactId>
     <dependencies>
         <dependency>
             <groupId>com.daocao</groupId>
-            <artifactId>daocao_auth</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.daocao</groupId>
-            <artifactId>daocao_sys_user</artifactId>
+            <artifactId>daocao_support</artifactId>
         </dependency>
     </dependencies>
+
 </project>
