@@ -1,6 +1,7 @@
 package com.daocao.common.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.daocao.common.entity.UmsMenu;
 import com.daocao.common.entity.UmsRole;
@@ -37,6 +38,14 @@ public class UmsMenuServiceImpl extends ServiceImpl<UmsMenuMapper, UmsMenu> impl
         router.forEach(System.out::println);
         return router;
     }
+
+    @Override
+    public List<RouterVo> searchMenuList() {
+        List<UmsMenu> umsMenus=baseMapper.selectList(null);
+        List<RouterVo> routerVos=getRouter(umsMenus);
+        return  routerVos;
+    }
+
     /*
     获取路由
      */

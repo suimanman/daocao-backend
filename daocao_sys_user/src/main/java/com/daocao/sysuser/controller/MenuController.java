@@ -24,4 +24,10 @@ public class MenuController {
         List<RouterVo> routerVoList=menuService.searchSelfMenu();
         return DaoCaoResult.success(routerVoList);
     }
+    @GetMapping("list")
+    public DaoCaoResult searchMenuList(){
+        //获取当前登录的用户ID，都在SecurityContextHolder中存储
+        List<RouterVo> menuList=menuService.searchMenuList();
+        return DaoCaoResult.success(menuList);
+    }
 }
