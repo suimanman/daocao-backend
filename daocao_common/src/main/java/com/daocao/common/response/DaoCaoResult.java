@@ -134,7 +134,7 @@ public class DaoCaoResult extends HashMap<String, Object> {
     @param msg 返回内容
     @return 错误消息
      */
-    public static DaoCaoResult error(String code,String msg){
+    public static DaoCaoResult error(int code,String msg){
         return new DaoCaoResult(HttpStatus.ERROR,msg,null);
     }
 

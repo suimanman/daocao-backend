@@ -10,4 +10,6 @@ public interface IUmsMenuService extends IService<UmsMenu> {
     List<RouterVo> searchSelfMenu();
 
     List<RouterVo> searchMenuList();
+
+    int saveMenu(UmsMenu umsMenu);
 }

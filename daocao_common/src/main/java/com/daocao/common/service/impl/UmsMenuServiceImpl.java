@@ -1,11 +1,14 @@
 package com.daocao.common.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.daocao.common.constants.HttpStatus;
 import com.daocao.common.entity.UmsMenu;
 import com.daocao.common.entity.UmsRole;
 import com.daocao.common.entity.vo.RouterVo;
+import com.daocao.common.exception.ServiceException;
 import com.daocao.common.mapper.UmsMenuMapper;
 import com.daocao.common.mapper.UmsRoleMapper;
 import com.daocao.common.service.IUmsMenuService;
@@ -44,6 +47,23 @@ public class UmsMenuServiceImpl extends ServiceImpl<UmsMenuMapper, UmsMenu> impl
         List<UmsMenu> umsMenus=baseMapper.selectList(null);
         List<RouterVo> routerVos=getRouter(umsMenus);
         return  routerVos;
+    }
+
+    @Override
+    public int saveMenu(UmsMenu umsMenu) {
+        String creator=DaoCaoSecurityUtil.getUsername();
+        umsMenu.setCreator(creator);
+        umsMenu.setUpdater(creator);
+        //判断是否已经存在
+        Long parentId=umsMenu.getParentId();
+        String menuName=umsMenu.getMenuName();
+        String path=umsMenu.getPath();
+        LambdaQueryWrapper<UmsMenu> wrapper=new LambdaQueryWrapper<>();
+        wrapper.eq(UmsMenu::getParentId,parentId).eq(UmsMenu::getMenuName,menuName).or().eq(UmsMenu::getPath,path);
+        Long count=baseMapper.selectCount(wrapper);
+        if(count>0)
+            throw new ServiceException(HttpStatus.ERROR,"该菜单或路径已存在！");
+        return baseMapper.insert(umsMenu);
     }
 
     /*
