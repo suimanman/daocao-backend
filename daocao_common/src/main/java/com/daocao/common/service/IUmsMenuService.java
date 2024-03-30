@@ -12,4 +12,10 @@ public interface IUmsMenuService extends IService<UmsMenu> {
     List<RouterVo> searchMenuList();
 
     int saveMenu(UmsMenu umsMenu);
+
+    UmsMenu searchInfo(Long id);
+
+    int updateMenu(UmsMenu umsMenu);
+
+    int removeMenu(Long[] id);
 }

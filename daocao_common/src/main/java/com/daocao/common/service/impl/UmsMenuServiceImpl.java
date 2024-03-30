@@ -18,6 +18,7 @@ import org.apache.catalina.User;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -61,9 +62,36 @@ public class UmsMenuServiceImpl extends ServiceImpl<UmsMenuMapper, UmsMenu> impl
         LambdaQueryWrapper<UmsMenu> wrapper=new LambdaQueryWrapper<>();
         wrapper.eq(UmsMenu::getParentId,parentId).eq(UmsMenu::getMenuName,menuName).or().eq(UmsMenu::getPath,path);
         Long count=baseMapper.selectCount(wrapper);
-        if(count>0)
-            throw new ServiceException(HttpStatus.ERROR,"该菜单或路径已存在！");
+        if(count>0) return -1;
+//            throw new ServiceException(HttpStatus.ERROR,"该菜单或路径已存在！");
         return baseMapper.insert(umsMenu);
+    }
+
+    @Override
+    public UmsMenu searchInfo(Long id) {
+        return baseMapper.selectById(id);
+
+    }
+
+    @Override
+    public int updateMenu(UmsMenu umsMenu) {
+        String updater=DaoCaoSecurityUtil.getUsername();
+        umsMenu.setUpdater(updater);
+        //判断是否已经存在
+        Long parentId=umsMenu.getParentId();
+        String menuName=umsMenu.getMenuName();
+        String path=umsMenu.getPath();
+        LambdaQueryWrapper<UmsMenu> wrapper=new LambdaQueryWrapper<>();
+        wrapper.eq(UmsMenu::getParentId,parentId).eq(UmsMenu::getMenuName,menuName).or().eq(UmsMenu::getPath,path);
+        Long count=baseMapper.selectCount(wrapper);
+        if(count>0)
+            return -1;
+        return baseMapper.updateById(umsMenu);
+    }
+
+    @Override
+    public int removeMenu(Long[] id) {
+        return baseMapper.deleteBatchIds(Arrays.asList(id));
     }
 
     /*
