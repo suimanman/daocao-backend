@@ -9,7 +9,7 @@ import java.util.List;
 public interface IUmsMenuService extends IService<UmsMenu> {
     List<RouterVo> searchSelfMenu();
 
-    List<RouterVo> searchMenuList();
+    List<UmsMenu> searchMenuList();
 
     int saveMenu(UmsMenu umsMenu);
 

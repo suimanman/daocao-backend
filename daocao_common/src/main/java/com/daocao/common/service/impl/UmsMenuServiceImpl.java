@@ -44,10 +44,8 @@ public class UmsMenuServiceImpl extends ServiceImpl<UmsMenuMapper, UmsMenu> impl
     }
 
     @Override
-    public List<RouterVo> searchMenuList() {
-        List<UmsMenu> umsMenus=baseMapper.selectList(null);
-        List<RouterVo> routerVos=getRouter(umsMenus);
-        return  routerVos;
+    public List<UmsMenu> searchMenuList() {
+        return baseMapper.selectList(null);
     }
 
     @Override
